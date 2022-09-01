@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] public LevelData[] levels;
+    [SerializeField] public TextAsset levelJSON;
     [SerializeField] public int currentLevelId = 1;
     public static LevelManager Instance { get; set; }
+    private LevelData[] levels;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+        levels = JsonUtility.FromJson<LevelList>(levelJSON.text).levels;
     }
 
     public LevelData GetCurrentLevel()

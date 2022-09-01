@@ -1,0 +1,24 @@
+﻿{
+  "levels": [
+    {
+      "levelId": 1,
+      "wordString": "ИВД",
+      "words": [ "ДИВ", "ВИД" ]
+    },
+    {
+      "levelId": 2,
+      "wordString": "ИХТ",
+      "words": [ "ТИХ", "ХИТ" ]
+    },
+    {
+      "levelId": 3,
+      "wordString": "ЛИПК",
+      "words": [ "КЛИП", "ПЛИК", "ПИК", "ЛИК" ]
+    },
+    {
+      "levelId": 3,
+      "wordString": "УРДА",
+      "words": [ "УДАР", "РУДА", "УРА", "ДАР" ]
+    }
+  ]
+}

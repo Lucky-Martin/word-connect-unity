@@ -2339,9 +2339,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32095e46e003c9c44885cbb1e5ab45e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levels:
-  - {fileID: 11400000, guid: 1190feeb8fc60db4a8152fca947d727f, type: 2}
-  - {fileID: 11400000, guid: 1b3b203f245dbe243a0aed72e2619ffe, type: 2}
-  - {fileID: 11400000, guid: caaaec68644e4ef49af559b87d4ddd32, type: 2}
-  - {fileID: 11400000, guid: 501b58899e3e2264d831372bb41f617c, type: 2}
-  currentLevelId: 2
+  levelJSON: {fileID: 4900000, guid: 3ac8bf3b466d3f542a3cf279152ef2cc, type: 3}
+  currentLevelId: 1
