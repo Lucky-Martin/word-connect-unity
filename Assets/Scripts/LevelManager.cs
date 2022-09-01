@@ -29,6 +29,11 @@ public class LevelManager : MonoBehaviour
         levels = JsonUtility.FromJson<LevelList>(levelJSON.text).levels;
     }
 
+    public int GetLevelCount()
+    {
+        return levels.Length;
+    }
+
     public LevelData GetCurrentLevel()
     {
         return levels[currentLevelId - 1];
