@@ -22,21 +22,23 @@ public class PlayerData : MonoBehaviour
 
     private void Start()
     {
-        LoadPlayerData();
+        InitPlayer();
     }
 
-    public void LoadPlayerData()
+    public void InitPlayer()
     {
-        level = PlayerPrefs.GetInt("level");
-        if (level == 0)
+        if (PlayerPrefs.GetInt("init") == 0)
         {
             level = 1;
-        }
-
-        coins = PlayerPrefs.GetInt("coins");
-        if (coins == 0)
-        {
             coins = 150;
+            SavePlayerData();
+
+            PlayerPrefs.SetInt("init", 1);
+        }
+        else
+        {
+            level = PlayerPrefs.GetInt("level");
+            coins = PlayerPrefs.GetInt("coins");
         }
     }
 

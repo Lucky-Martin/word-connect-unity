@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour
 
         if (playerData.level == 0)
         {
-            playerData.LoadPlayerData();
+            playerData.InitPlayer();
         }
 
         currentLevelId = playerData.level;
