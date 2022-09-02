@@ -6,27 +6,30 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] public TextAsset levelJSON;
-    [SerializeField] public int currentLevelId = 1;
+    [SerializeField] public int currentLevelId;
     public static LevelManager Instance { get; set; }
     private LevelData[] levels;
+    private PlayerData playerData;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        LevelManager[] objs = FindObjectsOfType<LevelManager>();
+
+        if (objs.Length > 1)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
-        else
-        {
-            Instance = this;
-        }
+
+        DontDestroyOnLoad(this.gameObject);
+
+        playerData = FindObjectOfType<PlayerData>();
+        currentLevelId = playerData.level;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
-        levels = JsonUtility.FromJson<LevelList>(levelJSON.text).levels;
+        LoadLevelsFromJson();
     }
 
     public int GetLevelCount()
@@ -36,12 +39,27 @@ public class LevelManager : MonoBehaviour
 
     public LevelData GetCurrentLevel()
     {
+        if (levels == null)
+        {
+            LoadLevelsFromJson();
+        }
+
+        if (playerData.level == 0)
+        {
+            playerData.LoadPlayerData();
+        }
+
+        currentLevelId = playerData.level;
+
         return levels[currentLevelId - 1];
     }
 
     public void LoadNextLevel()
     {
         currentLevelId += 1;
+        playerData.level += 1;
+        playerData.SavePlayerData();
+
         LoadLevel(currentLevelId);
     }
 
@@ -51,9 +69,15 @@ public class LevelManager : MonoBehaviour
         levelCompletedModal.OpenModal();
     }
 
+    private void LoadLevelsFromJson()
+    {
+        levels = JsonUtility.FromJson<LevelList>(levelJSON.text).levels;
+    }
+
     private void LoadLevel(int levelId)
     {
         currentLevelId = levelId;
+        Debug.Log("Load level with id: " + levelId);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

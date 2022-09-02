@@ -10,20 +10,23 @@ public class PlayerData : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        PlayerData[] objs = GameObject.FindObjectsOfType<PlayerData>();
+
+        if (objs.Length > 1)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
-        else
-        {
-            Instance = this;
-        }
+
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        LoadPlayerData();
+    }
 
+    public void LoadPlayerData()
+    {
         level = PlayerPrefs.GetInt("level");
         if (level == 0)
         {
